@@ -98,3 +98,4 @@ pip-selfcheck.json
 .ropeproject
 
 !/music_aekt/static/semantic/dist
+dump.rdb
