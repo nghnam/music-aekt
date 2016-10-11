@@ -26,7 +26,7 @@ def pause():
 def unpause():
     return mocp("-U")
 
-def next():
+def next_():
     return mocp("-f")
 
 def prev():
