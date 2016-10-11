@@ -17,6 +17,9 @@ def mocp(*args):
 def play():
     return mocp("-p")
 
+def playit(mp3_file):
+    return mocp("-l", mp3_file)
+
 def stop():
     return mocp("-s")
 
