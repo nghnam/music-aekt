@@ -21,60 +21,56 @@ def play():
     _, status = moc.play()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
     
 @main.route('/stop', methods=['GET'])
 def stop():
     _, status = moc.stop()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
 
 @main.route('/next', methods=['GET'])
 def next():
     _, status = moc.next()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
 
 @main.route('/prev', methods=['GET'])
 def prev():
     _, status = moc.prev()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
 
 @main.route('/pause', methods=['GET'])
 def pause():
     _, status = moc.pause()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
 
 @main.route('/unpause', methods=['GET'])
 def unpause():
     _, status = moc.pause()
     if status != 0:
         abort(500)
-    return "OK", 200
+    return "OK"
     
 @main.route('/info', methods=['GET'])
 def info():
     output, exit_code = moc.show_current_song()
     if exit_code == 0:
         payload = _create_info_dict(output)
-        resp = jsonify(payload)
-        resp.status_code = 200
-        return resp
+        return jsonify(payload)
     return '{}', 500
 
 @main.route('/playlist', methods=['GET'])
 def playlist():
     playlist = moc.show_play_list()
     payload = _create_playlist_dict(playlist)
-    resp = jsonify(payload)
-    resp.status_code = 200
-    return resp
+    return jsonify(payload)
 
 def _create_info_dict(info):
     info = info.decode('utf-8')
