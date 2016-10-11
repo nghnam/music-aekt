@@ -23,6 +23,19 @@ def play():
         abort(500)
     return "OK"
 
+@main.route('/playit', methods=['GET', 'POST'])
+def playit():
+    if request.method == 'GET':
+        mp3_file = request.args.get('file')
+    elif request.method == 'POST':
+        mp3_file = request.form.get('file')
+    _, status =  moc.playit(mp3_file)
+    if status != 0:
+        abort(500)
+    return "OK"
+
+    
+
 @main.route('/stop', methods=['GET'])
 def stop():
     _, status = moc.stop()
