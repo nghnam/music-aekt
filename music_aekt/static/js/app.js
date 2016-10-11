@@ -59,42 +59,18 @@ function getSongData(data){
     song.DisplayName = song.Title + ' - ' + song.Artist
   }
 
-  song.DisplayName += "<br />" + song.State
   return song
 }
 
-function setControl(data) {
-  if(data.State == 'PLAY') {
-    $('.play-act').each(function(){
-      $(this).removeClass('disabled');
-    });
-    $('#ctrl-play > i').removeClass('play').addClass('pause')
-  }
-
-  if(data.State == 'PAUSE') {
-    $('.play-act').each(function(){
-      $(this).removeClass('disabled');
-    });
-    $('#ctrl-play > i').removeClass('pause').addClass('play')
-  }
-
-  if(data.State == 'STOP') {
-    $('.play-act').each(function(){
-      $(this).addClass('disabled');
-    });
-    $('#ctrl-play > i').removeClass('pause').addClass('play')
-  }
-
-}
-
 // handle current song
-
 function setProgress(opts){
   $('#play-progress').progress(opts);
 }
 
 function loadPlayer(){
   $.get( "/info", function( data ) {
+    song = getSongData(data)
+
     // Stopping
     if(data.State == 'STOP'){
       var noPlay = {
@@ -106,11 +82,11 @@ function loadPlayer(){
       }
       setProgress(noPlay);
       $('#play-progress').removeClass('teal');
+      $('#play-state').html('');
     }
 
     // Playing
     if(data.State == 'PLAY' || data.State == 'PAUSE'){
-      song = getSongData(data)
       var noPlay = {
         percent: (data.CurrentSec / data.TotalSec) * 100,
         text: {
@@ -119,9 +95,8 @@ function loadPlayer(){
       }
       setProgress(noPlay);
       $('#play-progress').addClass('teal');
+      $('#play-state').html('Trạng thái: <a class="ui grey label tiny">' + data.State + '</a>');
     }
-
-    setControl(data);
   });
 }
 loadPlayer();
@@ -132,39 +107,6 @@ setInterval(function(){
 
 ////////////////// END handle current song
 
-/// control
-function doAction(act, payload={}){
-  $.get( "/" + act, payload, function( data ) {
-    loadPlayer();
-  })
-}
-
-$('#ctrl-play').click(function(event){
-  if($(this).children('i').hasClass('play')){
-    // click to play
-    doAction('play')
-
-  }else if ($(this).children('i').hasClass('pause')) {
-    // click to pause
-    doAction('pause')
-  }
-});
-
-$('#ctrl-prev').click(function() {
-  doAction('prev')
-})
-$('#ctrl-next').click(function() {
-  doAction('next')
-})
-$(document).on('click', '.playit', function(){
-
-    var file = $(this).attr('play')
-    doAction('playit', {file: file})
-    loadPlayer();
-});
-////////////////////// END control
-
-
 // playlist
 function loadPlaylist(){
   $.get( "/playlist", function(data) {
@@ -172,24 +114,21 @@ function loadPlaylist(){
 
       var items = '';
       $.each(data.playlist, function(_, e){
-        // items += '<div class="item"><div class="right floated content"><div class="ui button mini playit" play=' + e.path + '><i class="play icon"></i></div></div><div class="content">' + e.title + '</div></div>';
-        items += '<div class="item"><div class="right floated content"></div><div class="content">';
+        items += '<div class="ui segment">';
         if(song.File == e.path){
-          items += '<i class="ui icon angle double right teal"></i> '
+          items += '<p style="color: #009c95">'
           items += e.title
-          items += '<i class="ui icon angle double left teal"></i>'
+          items += '</p>'
         }else {
           items += e.title
         }
-        items += '</div></div>';
+        items += '</div>';
       });
       $('.playlist').html(items);
     }
     catch(err) {
       $('.playlist').html('<div class="ui icon message"><i class="warning sign icon"></i><div class="content"><div class="header">Ồ, có lỗi</div><p>' + err + '.</p></div></div>');
     }
-    // $('.list').html('<div class="ui icon message"><i class="announcement icon"></i><div class="content"><div class="header">Ồ</div><p>Không có thông tin playlist.</p></div></div>');
-    // loadPlayer();
   })
 }
 loadPlaylist()
