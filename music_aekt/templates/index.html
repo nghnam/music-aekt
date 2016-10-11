@@ -50,6 +50,16 @@
   <h3 class="ui header">List nhạc</h3>
 
   <div class="ui middle aligned divided list" style="text-align: left">
+    <div class="ui icon message">
+      <i class="notched circle loading icon"></i>
+      <div class="content">
+        <div class="header">
+          Chờ tý
+        </div>
+        <p>Đang tải thông tin.</p>
+      </div>
+    </div>
+    <!--
     <div class="item">
       <div class="right floated content">
         <div class="ui button mini"><i class="play icon"></i></div>
@@ -58,31 +68,7 @@
         Lena
       </div>
     </div>
-    <div class="item">
-      <div class="right floated content">
-        <div class="ui button mini"><i class="play icon"></i></div>
-      </div>
-      <div class="content">
-        <i class="sound icon"></i>
-        /tmp/Hay-Ra-Khoi-Nguoi-Do-Di-Phan-Manh-Quynh.mp3
-      </div>
-    </div>
-    <div class="item">
-      <div class="right floated content">
-        <div class="ui button mini"><i class="play icon"></i></div>
-      </div>
-      <div class="content">
-        Mark
-      </div>
-    </div>
-    <div class="item">
-      <div class="right floated content">
-        <div class="ui button mini"><i class="play icon"></i></div>
-      </div>
-      <div class="content">
-        Molly
-      </div>
-    </div>
+    -->
   </div>
 
 </div>
@@ -184,8 +170,6 @@ function setProgress(opts){
 
 function loadPlayer(){
   $.get( "/info", function( data ) {
-    console.log(data)
-
     // Stopping
     if(data.State == 'STOP'){
       var noPlay = {
@@ -224,8 +208,8 @@ setInterval(function(){
 ////////////////// END handle current song
 
 /// control
-function doAction(act){
-  $.get( "/" + act, function( data ) {
+function doAction(act, payload={}){
+  $.get( "/" + act, payload, function( data ) {
     loadPlayer();
   })
 }
@@ -247,6 +231,37 @@ $('#ctrl-prev').click(function() {
 $('#ctrl-next').click(function() {
   doAction('next')
 })
+$(document).on('click', '.playit', function(){
+
+    var file = $(this).attr('play')
+    doAction('playit', {file: file})
+    loadPlayer();
+});
 ////////////////////// END control
+
+
+// playlist
+function loadPlaylist(){
+  $.get( "/playlist", function(data) {
+    try {
+
+      var items = '';
+      $.each(data.playlist, function(_, e){
+        items += '<div class="item"><div class="right floated content"><div class="ui button mini playit" play=' + e.path + '><i class="play icon"></i></div></div><div class="content">' + e.title + '</div></div>';
+      });
+      $('.list').html(items);
+    }
+    catch(err) {
+      $('.list').html('<div class="ui icon message"><i class="warning sign icon"></i><div class="content"><div class="header">Ồ, có lỗi</div><p>' + err + '.</p></div></div>');
+    }
+    // $('.list').html('<div class="ui icon message"><i class="announcement icon"></i><div class="content"><div class="header">Ồ</div><p>Không có thông tin playlist.</p></div></div>');
+    // loadPlayer();
+  })
+}
+loadPlaylist()
+setInterval(function(){
+  loadPlaylist();
+}, 3000);
+
 </script>
 {% endblock %}
