@@ -59,6 +59,7 @@ function getSongData(data){
     song.DisplayName = song.Title + ' - ' + song.Artist
   }
 
+  song.DisplayName += "<br />" + song.State
   return song
 }
 

@@ -66,6 +66,13 @@ def pause():
         abort(500)
     return "OK"
 
+@main.route('/togglePause', methods=['GET'])
+def togglePause():
+    _, status = moc.togglePause()
+    if status != 0:
+        abort(500)
+    return "OK"
+
 @main.route('/unpause', methods=['GET'])
 def unpause():
     _, status = moc.pause()
