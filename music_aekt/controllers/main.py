@@ -32,7 +32,7 @@ def stop():
 
 @main.route('/next', methods=['GET'])
 def next():
-    _, status = moc.next()
+    _, status = moc.next_()
     if status != 0:
         abort(500)
     return "OK"
