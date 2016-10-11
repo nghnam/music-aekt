@@ -35,7 +35,7 @@
   <h3 class="ui header">Nhạc đang chơi</h3>
 
   <div class="ui icon buttons">
-    <button class="ui button mini disabled play-act" id="ctrl-back"><i class="backward icon"></i></button>
+    <button class="ui button mini disabled play-act" id="ctrl-prev"><i class="backward icon"></i></button>
     <button class="ui button mini disabled play-act" id="ctrl-play"><i class="icon play"></i></button>
     <button class="ui button mini disabled play-act" id="ctrl-next"><i class="forward icon"></i></button>
   </div>
@@ -224,20 +224,29 @@ setInterval(function(){
 ////////////////// END handle current song
 
 /// control
+function doAction(act){
+  $.get( "/" + act, function( data ) {
+    loadPlayer();
+  })
+}
 
-  $('#ctrl-play > i').click(function(event){
-    if($(this).hasClass('play')){
-      // click to play
-      $.get( "/play", function( data ) {
-        loadPlayer();
-      })
+$('#ctrl-play').click(function(event){
+  if($(this).children('i').hasClass('play')){
+    // click to play
+    doAction('play')
 
-    }else if ($(this).hasClass('pause')) {
-      // click to pause
-      $.get( "/pause", function( data ) {
-        loadPlayer();
-      })
-    }
-  });
+  }else if ($(this).children('i').hasClass('pause')) {
+    // click to pause
+    doAction('pause')
+  }
+});
+
+$('#ctrl-prev').click(function() {
+  doAction('prev')
+})
+$('#ctrl-next').click(function() {
+  doAction('next')
+})
+////////////////////// END control
 </script>
 {% endblock %}
