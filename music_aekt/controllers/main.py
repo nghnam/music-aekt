@@ -22,7 +22,7 @@ def play():
     if status != 0:
         abort(500)
     return "OK"
-    
+
 @main.route('/stop', methods=['GET'])
 def stop():
     _, status = moc.stop()
@@ -57,7 +57,7 @@ def unpause():
     if status != 0:
         abort(500)
     return "OK"
-    
+
 @main.route('/info', methods=['GET'])
 def info():
     output, exit_code = moc.show_current_song()
