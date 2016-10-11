@@ -1,5 +1,13 @@
 var song = {}
 
+function dimPlayer(){
+  $('#player').append('<div class="ui active dimmer"><div class="ui text loader">Loading</div></div>')
+}
+
+function undimPlayer(){
+  $('.dimmer').remove()
+}
+
 // init checkbox
 $('.ui.checkbox')
 .checkbox()
@@ -29,11 +37,11 @@ $('.ui.form')
     }
   },
   onSuccess: function(event, fields){
-    console.log(this);
+    dimPlayer()
     event.preventDefault();
 
     $.post( "/", $( this ).serialize(), function( data ) {
-      alert('OK, Chờ tý đang down về list nhạc');
+      // alert('OK, Chờ tý đang down về list nhạc');
     });
   }
 })
@@ -110,6 +118,7 @@ setInterval(function(){
 // playlist
 function loadPlaylist(){
   $.get( "/playlist", function(data) {
+    undimPlayer();
     try {
 
       var items = '';
