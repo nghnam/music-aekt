@@ -33,13 +33,21 @@ config.py
 Run
 ===
 1, Music on console
+```
 $ mocp -S
+```
 
 2, Redis
+```
 # service redis-server start
+```
 
-2, Celery
+3, Celery
+```
 $ celery worker -A music_aekt.tasks --loglevel=info
+```
 
-3, Flask
+4, Flask
+```
 $ python app.py
+```
