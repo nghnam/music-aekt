@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        {% block head %}{% endblock %}
+         <meta charset="UTF-8">
+         <link rel="stylesheet" type="text/css" href="/static/semantic/dist/semantic.min.css">
+         <script src="/static/js/jquery.min.js"></script>
+         <script src="/static/semantic/dist/semantic.min.js"></script>
+
+         {% block head %}{% endblock %}
     </head>
     <div>
         {% block body %}{% endblock %}
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     {% block scripts %}{% endblock %}
 </html>
