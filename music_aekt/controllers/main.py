@@ -32,7 +32,7 @@ def stop():
 
 @main.route('/next', methods=['GET'])
 def next():
-    _, status = moc.next()
+    _, status = moc.next_()
     if status != 0:
         abort(500)
     return "OK"
@@ -83,9 +83,10 @@ def _create_info_dict(info):
 
 def _create_playlist_dict(playlist):
     d = {'playlist': []}
-    for length, title in playlist:
+    for length, title, path in playlist:
         info = {}
         info['length'] = int(length)
         info['title'] = title.split('/')[-1].split('.mp3')[0]
+        info['path'] = path
         d['playlist'].append(info)
     return d

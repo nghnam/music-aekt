@@ -26,7 +26,7 @@ def pause():
 def unpause():
     return mocp("-U")
 
-def next():
+def next_():
     return mocp("-f")
 
 def prev():
@@ -53,6 +53,7 @@ def show_play_list():
         for line in f:
             if line.startswith('#EXTINF'):
                 length, title = line.split('#EXTINF:')[1].split(',', 1)
-                playlist.append((length, title.strip()))
+                mp3_file_path = next(f).strip()
+                playlist.append((length, title.strip(), mp3_file_path))
 
     return playlist
