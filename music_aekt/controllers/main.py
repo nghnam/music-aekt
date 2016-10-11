@@ -8,6 +8,10 @@ from music_aekt.tasks import download
 main = Blueprint('main', __name__)
 
 
+@main.route('/admin', methods=['GET'])
+def admin():
+    return render_template('admin.html')
+
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
