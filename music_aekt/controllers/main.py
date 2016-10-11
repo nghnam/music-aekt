@@ -34,8 +34,6 @@ def playit():
         abort(500)
     return "OK"
 
-    
-
 @main.route('/stop', methods=['GET'])
 def stop():
     _, status = moc.stop()
@@ -67,6 +65,13 @@ def pause():
 @main.route('/unpause', methods=['GET'])
 def unpause():
     _, status = moc.pause()
+    if status != 0:
+        abort(500)
+    return "OK"
+
+@main.route('/clear', methods=['GET'])
+def clear():
+    _, status = moc.clear()
     if status != 0:
         abort(500)
     return "OK"
