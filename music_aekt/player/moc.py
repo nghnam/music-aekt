@@ -1,5 +1,5 @@
 import os.path
-import subprocess 
+import subprocess
 
 from flask import current_app
 
@@ -25,6 +25,9 @@ def stop():
 
 def pause():
     return mocp("-P")
+
+def togglePause():
+    return mocp("-G")
 
 def unpause():
     return mocp("-U")

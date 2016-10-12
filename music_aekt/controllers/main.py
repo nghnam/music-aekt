@@ -8,6 +8,10 @@ from music_aekt.tasks import download
 main = Blueprint('main', __name__)
 
 
+@main.route('/admin', methods=['GET'])
+def admin():
+    return render_template('admin.html')
+
 @main.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -58,6 +62,13 @@ def prev():
 @main.route('/pause', methods=['GET'])
 def pause():
     _, status = moc.pause()
+    if status != 0:
+        abort(500)
+    return "OK"
+
+@main.route('/togglePause', methods=['GET'])
+def togglePause():
+    _, status = moc.togglePause()
     if status != 0:
         abort(500)
     return "OK"

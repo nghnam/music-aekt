@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Admin | Music AEKT</title>
+{% endblock %}
+
+{% block body %}
+<div class="ui main text container" style="text-align: center">
+  <br>
+  <h1 class="ui header">Music Controller</h1>
+
+  <p><button class="fluid ui button ctrl" act="togglePause">Pause / Play</button></p>
+  <p><button class="fluid ui button ctrl" act="play">Start playlist</button></p>
+  <p><button class="fluid ui button ctrl" act="stop">Stop playlist</button></p>
+  <p><button class="fluid ui button ctrl" act="clear">Clear playlist</button></p>
+  <p><button class="fluid ui button ctrl" act="">Volume UP</button></p>
+  <p><button class="fluid ui button ctrl" act="">Volume Down</button></p>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+$('.ctrl').click(function(){
+  var act = $(this).attr('act')
+  var payload = {}
+  $.get( "/" + act, payload, function( data ) {
+    console.log(data);
+  })
+});
+</script>
+{% endblock %}

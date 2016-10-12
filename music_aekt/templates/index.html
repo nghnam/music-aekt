@@ -21,7 +21,7 @@
     <div class="field">
       <div class="ui checkbox">
         <input type="checkbox" tabindex="0" class="hidden" name="terms">
-        <label>Tôi hứa sẽ <strong><u>không next</u></strong> bài của các bạn</label>
+        <label>Tôi hứa sẽ <strong>không next</strong> bài của các bạn</label>
       </div>
     </div>
 
@@ -32,33 +32,23 @@
   </form>
 
   <br>
-  <h3 class="ui header">Nhạc đang chơi</h3>
+  <div class="ui inverted segment" id="player">
+    <h3 class="ui header">Nhạc đang chơi</h3>
 
-  <!-- <div class="ui icon buttons">
-    <button class="ui button mini disabled play-act" id="ctrl-prev"><i class="backward icon"></i></button>
-    <button class="ui button mini disabled play-act" id="ctrl-play"><i class="icon play"></i></button>
-    <button class="ui button mini disabled play-act" id="ctrl-next"><i class="forward icon"></i></button>
-  </div> -->
-
-
-  <div class="ui progress tiny" id="play-progress">
-    <div class="bar disabled"></div>
-    <div class="label" style="font-size: 16px"> <i class="notched circle loading icon"></i> Đang tải thông tin</div>
+    <div class="ui progress tiny" id="play-progress">
+      <div class="bar disabled"></div>
+      <div class="label" style="font-size: 16px; color: #fff"> <i class="notched circle loading icon"></i> Đang tải thông tin</div>
+    </div>
+    <p id='play-state'></p>
   </div>
 
-  <br>
-  <h3 class="ui header">List nhạc</h3>
-
-  <div class="ui middle aligned divided list playlist" style="text-align: ">
-    <div class="ui icon message">
-      <i class="notched circle loading icon"></i>
-      <div class="content">
-        <div class="header">
-          Chờ tý
-        </div>
-        <p>Đang tải thông tin.</p>
+  <div class="ui">
+    <div class="ui piled segments playlist">
+      <div class="ui segment">
+        <p>Chưa có bài nào</p>
       </div>
     </div>
+
   </div>
 
 </div>
