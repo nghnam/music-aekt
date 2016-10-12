@@ -1,34 +1,27 @@
-music-aekt
-==========
+music-aekt (Music Anh Em Kĩ Thuật)
+==================================
 
-Relax music player
+![](screenshot.jpg)
+
+Support source
+==============
+Only support music in MP3 Zing at the momment
 
 Require
 =======
 
-1, Music on console
-https://moc.daper.net/
+* [Music on console(MOC)](https://moc.daper.net)
+* Python/Flask
+* Celery 
+* Redis (broker)
 
-Debian/Ubuntu
+How to install (Ubuntu/Debian)
+==============================
+
 ```
-sudo apt-get install moc
+$ sudo apt-get install moc redis-server
+$ pip install -r requirements.txt
 ```
-
-Other:
-https://moc.daper.net/node/89
-
-2, Flask/Celery/Python 3.x
-
-3, Redis (broker)
-
-Support source
-==============
-Now only support music in mp3.zing.vn
-
-Config
-======
-config.py
-
 
 Run
 ===
@@ -44,10 +37,15 @@ $ mocp -S
 
 3, Celery
 ```
-$ celery worker -A music_aekt.tasks --loglevel=info
+$ celery worker -A music_aekt.tasks -c 1 --loglevel=info
 ```
 
-4, Flask
+4, HTTP Server
 ```
-$ python app.py
+$ gunicorn wsgi:app config.py -w 2 -b 0.0.0.0:8080
 ```
+
+Contributors
+============
+* [Dang Tung Lam](https://github.com/tunglam14/)
+
