@@ -101,6 +101,20 @@ def playlist():
     payload = _create_playlist_dict(playlist)
     return jsonify(payload)
 
+@main.route('/volume_up', methods=['GET'])
+def volume_up():
+    _, status = moc.volume(level='up')
+    if status != 0:
+        abort(500)
+    return 'OK'
+
+@main.route('/volume_down', methods=['GET'])
+def volume_up():
+    _, status = moc.volume(level='down')
+    if status != 0:
+        abort(500)
+    return 'OK'
+
 def _create_info_dict(info):
     info = info.decode('utf-8')
     d = {}

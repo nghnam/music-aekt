@@ -63,3 +63,19 @@ def show_play_list():
                 playlist.append((length, title.strip(), mp3_file_path))
 
     return playlist
+
+def volume(level='up'):
+    if level == 'up':
+        command = ['vol', '+']
+    else:
+        command = ['vol', '-']
+    output = ''
+    exit_code = 0
+    try:
+        output = subprocess.check_output(command,
+                                         shell=False,
+                                         stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        exit_code = e.returncode
+    return output, exit_code
+
