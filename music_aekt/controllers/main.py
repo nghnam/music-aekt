@@ -109,7 +109,7 @@ def volume_up():
     return 'OK'
 
 @main.route('/volume_down', methods=['GET'])
-def volume_up():
+def volume_down():
     _, status = moc.volume(level='down')
     if status != 0:
         abort(500)
