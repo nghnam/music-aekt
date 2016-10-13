@@ -48,4 +48,4 @@ $ gunicorn wsgi:app config.py -w 2 -b 0.0.0.0:8080
 Contributors
 ============
 * [Dang Tung Lam](https://github.com/tunglam14/)
-
+* Nguyen Hoang Nam <nguyen.h.nam.vn@gmail.com>
