@@ -39,7 +39,7 @@ class NCTDownloader(object):
         metadata_url = self._extract_metadata_url()
         if metadata_url:
             r = requests.get(url=metadata_url, headers=self.headers)
-            self.metadata = str(r.content)
+            self.metadata = r.content
 
     def _get_cover(self):
         # http://image.mp3.zdn.vn/cover3_artist/3/3/33a0b0292c3fac8cc63a529fccbb1df9_1470739610.jpg
