@@ -5,7 +5,8 @@ music-aekt (Music Anh Em Kĩ Thuật)
 
 Support source
 ==============
-Only support music in MP3 Zing at the momment
+* [MP3 Zing](http://mp3.zing.vn)
+* [Nhaccuatui](http://www.nhaccuatui.com)
 
 Require
 =======
