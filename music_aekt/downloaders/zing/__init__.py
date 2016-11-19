@@ -49,7 +49,7 @@ class ZingDownloader(object):
             sources_list = self.metadata['data'][0]['source_list']
             for source in sources_list:
                 if source:
-                    self.download_url = 'http://' + url[0] if url else ''
+                    self.download_url = 'http://' + source
                     break
 
     def _create_file_name(self):
