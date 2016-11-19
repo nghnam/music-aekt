@@ -1,12 +1,14 @@
 from flask import (abort, Blueprint, current_app, jsonify, render_template,
                    request)
 
+from flask_httpauth import HTTPDigestAuth
+
 from music_aekt.player import moc
 from music_aekt.tasks import download
 
 
 main = Blueprint('main', __name__)
-
+auth = HTTPDigestAuth()
 
 @main.route('/admin', methods=['GET'])
 def admin():
@@ -46,6 +48,7 @@ def stop():
     return "OK"
 
 @main.route('/next', methods=['GET'])
+@auth.login_required
 def next():
     _, status = moc.next_()
     if status != 0:
@@ -53,6 +56,7 @@ def next():
     return "OK"
 
 @main.route('/prev', methods=['GET'])
+@auth.login_required
 def prev():
     _, status = moc.prev()
     if status != 0:
@@ -133,3 +137,8 @@ def _create_playlist_dict(playlist):
         info['path'] = path
         d['playlist'].append(info)
     return d
+
+@auth.get_password
+def get_password(username):
+    users = current_app.config.get('USERS', {})
+    return users.get(username)
