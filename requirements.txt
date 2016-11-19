@@ -1,6 +1,6 @@
 celery
 Flask
-flask-auth
+flask-httpauth
 gunicorn
 redis
 requests
