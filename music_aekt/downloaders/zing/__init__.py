@@ -47,8 +47,10 @@ class ZingDownloader(object):
     def _extract_mp3_link(self):
         if self.metadata:
             sources_list = self.metadata['data'][0]['source_list']
-            url = list(filter(lambda x: 'mp3.zdn.vn' in x, sources_list))
-            self.download_url = 'http://' + url[0] if url else ''
+            for source in sources_list:
+                if source:
+                    self.download_url = 'http://' + url[0] if url else ''
+                    break
 
     def _create_file_name(self):
         if self.metadata:
