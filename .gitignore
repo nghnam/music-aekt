@@ -100,3 +100,9 @@ pip-selfcheck.json
 
 !/music_aekt/static/semantic/dist
 dump.rdb
+
+# vscode
+.vscode/
+
+# pycharm
+.idea/
