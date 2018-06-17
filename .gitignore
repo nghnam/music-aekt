@@ -106,3 +106,5 @@ dump.rdb
 
 # pycharm
 .idea/
+
+.logs
