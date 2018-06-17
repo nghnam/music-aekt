@@ -1,3 +1,9 @@
 node {
-    echo 'Hello from Pipeline'
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Test') {
+        
+    }
 }
