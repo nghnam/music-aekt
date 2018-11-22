@@ -11,6 +11,9 @@ class TestUnitTest(unittest.TestCase):
     def test_sub(self):
         self.assertEqual(1-1, 0)
  
+    def test_multiply(self):
+        self.assertEqual(2*5, 10)
+
 if __name__ == '__main__':
     unittest.main()
 
