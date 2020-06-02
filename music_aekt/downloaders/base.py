@@ -9,8 +9,13 @@ class DownloaderBase(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def __init__(self, url, path=None, headers=None, pattern=None):
         self.url = url
-        self.path = SAVE_LOCATION
-        self.headers = HEADERS
+        self.path = path
+        if self.path is None:
+            self.path = SAVE_LOCATION
+        self.headers = headers
+        if self.headers is None:
+            self.headers = HEADERS
+
 
     @abc.abstractmethod
     def download_mp3_file(self):

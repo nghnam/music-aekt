@@ -27,6 +27,15 @@ class TestDownloaderImplementation(unittest.TestCase):
             self.assertIsNotNone(self, d.path)
             self.assertIsNotNone(self, d.headers)
 
+    def test_downloader_init_custom_args(self):
+        url = 'https://mp3.zing.vn/foo'
+        path = '/foo'
+        headers = 'bar'
+        d = ZingDownloader(url, path, headers)
+        self.assertTrue(self, d.url == url)
+        self.assertTrue(self, d.path == path)
+        self.assertTrue(self, d.headers == headers)
+
 
 if __name__ == '__main__':
     unittest.main()
