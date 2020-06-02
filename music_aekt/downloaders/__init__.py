@@ -1,18 +1,21 @@
-import abc
+from .zing import ZingDownloader
+from .nhaccuatui import NCTDownloader
 
 
-SAVE_LOCATION = '/tmp'
-HEADERS = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36'}
+class SongDownloader(object):
 
+    def __init__(self, url):
+        self.downloader = self._get_downloader(url)
 
-class DownloaderBase(metaclass=abc.ABCMeta):
+    def _get_downloader(self, url):
+        if "mp3.zing.vn" in url:
+            d = ZingDownloader
+        elif "nhaccuatui.com" in url:
+            d = NCTDownloader
+        else:
+            raise Exception('No downloader found')
 
-    @abc.abstractmethod
-    def __init__(self, url, path=None, headers=None, pattern=None):
-        self.url = url
-        self.path = SAVE_LOCATION
-        self.headers = HEADERS
+        return d(url)
 
-    @abc.abstractmethod
-    def download_mp3_file(self):
-        raise NotImplementedError
+    def download(self):
+        return self.downloader.download_mp3_file()

@@ -2,7 +2,7 @@ import re
 
 import requests
 
-from .. import DownloaderBase
+from ..base import DownloaderBase
 
 ZING_PATTERN = 'var xml_link = "(.*?)";'
 

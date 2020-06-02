@@ -3,7 +3,7 @@ from xml.etree import ElementTree as ET
 
 import requests
 
-from .. import DownloaderBase
+from ..base import DownloaderBase
 
 
 class NCTDownloader(DownloaderBase):
