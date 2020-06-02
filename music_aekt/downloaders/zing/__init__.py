@@ -2,16 +2,18 @@ import re
 
 import requests
 
+from .. import DownloaderBase
 
-class ZingDownloader(object):
+ZING_PATTERN = 'var xml_link = "(.*?)";'
 
-    def __init__(self, url, path, headers=None, pattern=None):
-        self.url = url
-        self.headers = headers
+
+class ZingDownloader(DownloaderBase):
+
+    def __init__(self, url, path=None, headers=None, pattern=ZING_PATTERN):
+        super(ZingDownloader, self).__init__(url, path, headers, pattern)
         self._rule = "http://mp3.zing.vn/bai-hat"
         self._pattern = pattern if pattern \
                                 else '<div id="html5player" data-xml="(.*?)"'
-        self.path = path
         self.filename = ''
         self.metadata = None
         self.download_url = ''

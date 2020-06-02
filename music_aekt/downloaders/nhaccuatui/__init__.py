@@ -3,16 +3,16 @@ from xml.etree import ElementTree as ET
 
 import requests
 
+from .. import DownloaderBase
 
-class NCTDownloader(object):
 
-    def __init__(self, url, path, headers=None, pattern=None):
-        self.url = url
-        self.headers = headers
+class NCTDownloader(DownloaderBase):
+
+    def __init__(self, url, path=None, headers=None, pattern=None):
+        super(NCTDownloader, self).__init__(url, path, headers, pattern)
         self._rule = "http://www.nhaccuatui.com/bai-hat"
         self._pattern = pattern if pattern \
                                 else 'player.peConfig.xmlURL = "(.*?)";'
-        self.path = path
         self.filename = ''
         self.metadata = None
         self.download_url = ''
